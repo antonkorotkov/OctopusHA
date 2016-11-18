@@ -1,0 +1,164 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "octopusDnsName": {
+      "type": "string",
+      "metadata": {
+        "description": "Unique DNS Name used to address Octopus Deploy."
+      }
+    },
+    "vnetName": {
+      "type": "string",
+      "defaultValue": "dieun",
+      "metadata": {
+        "description": "VNet name"
+      }
+    },
+    "vnetAddressPrefix": {
+      "type": "string",
+      "defaultValue": "172.16.0.0/16",
+      "metadata": {
+        "description": "Address prefix"
+      }
+    },
+    "subnet1Prefix": {
+      "type": "string",
+      "defaultValue": "172.16.1.0/24",
+      "metadata": {
+        "description": "difrondend Prefix"
+      }
+    },
+    "subnet1Name": {
+      "type": "string",
+      "defaultValue": "difrondend",
+      "metadata": {
+        "description": "difrondend Name"
+      }
+    },
+    "subnet2Prefix": {
+      "type": "string",
+      "defaultValue": "172.16.2.0/24",
+      "metadata": {
+        "description": "diapplayer Prefix"
+      }
+    },
+    "subnet2Name": {
+      "type": "string",
+      "defaultValue": "diapplayer",
+      "metadata": {
+        "description": "diapplayer Name"
+      }
+    },
+    "subnet3Prefix": {
+      "type": "string",
+      "defaultValue": "172.16.3.0/24",
+      "metadata": {
+        "description": "didata Prefix"
+      }
+    },
+    "subnet3Name": {
+      "type": "string",
+      "defaultValue": "didata",
+      "metadata": {
+        "description": "didata Name"
+      }
+    },
+    "subnet4Prefix": {
+      "type": "string",
+      "defaultValue": "172.16.4.0/24",
+      "metadata": {
+        "description": "digateway Prefix"
+      }
+    },
+    "subnet4Name": {
+      "type": "string",
+      "defaultValue": "digateway",
+      "metadata": {
+        "description": "digateway Name"
+      }
+    },
+    "numberOfNodes": {
+      "type": "int",
+      "defaultValue": 2,
+      "metadata": {
+        "description": "Number of Public IP address to create"
+      }
+    }
+  },
+  "variables": {
+    "apiVersion": "2015-06-15",
+    "namespace": "di",
+    "network": {
+      "domainName": "[parameters('octopusDnsName')]",
+      "publicIP": {
+        "name": "[concat(variables('namespace'), '-publicip')]",
+        "type": "Static"
+      }
+    },
+    "tags": {
+      "vendor": "Octopus Deploy"
+    }
+  },
+    "resources": [
+      {
+        "apiVersion": "[variables('apiVersion')]",
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[parameters('vnetName')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[parameters('vnetAddressPrefix')]"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "[parameters('subnet1Name')]",
+              "properties": {
+                "addressPrefix": "[parameters('subnet1Prefix')]"
+              }
+            },
+            {
+              "name": "[parameters('subnet2Name')]",
+              "properties": {
+                "addressPrefix": "[parameters('subnet2Prefix')]"
+              }
+            },
+            {
+              "name": "[parameters('subnet3Name')]",
+              "properties": {
+                "addressPrefix": "[parameters('subnet3Prefix')]"
+              }
+            },
+
+            {
+              "name": "[parameters('subnet4Name')]",
+              "properties": {
+                "addressPrefix": "[parameters('subnet4Prefix')]"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "apiVersion": "2015-06-15",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "name": "[concat(variables('network').publicIP.name, copyindex())]",
+        "copy": {
+          "name": "ipLoop",
+          "count": "[parameters('numberOfNodes')]"
+        },
+        "location": "[resourceGroup().location]",
+        "tags": {
+          "vendor": "[variables('tags').vendor]"
+        },
+        "properties": {
+          "publicIPAllocationMethod": "[variables('network').publicIP.type]",
+          "dnsSettings": {
+            "domainNameLabel": "[concat(variables('network').domainName, copyindex())]"
+          }
+        }
+      }
+    ]
+  }
