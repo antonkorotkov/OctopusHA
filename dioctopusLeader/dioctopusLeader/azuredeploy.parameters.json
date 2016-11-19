@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vnetName": {
+      "value": "dieun"
+    },
+    "baseUrl": {
+      "value": "https://diorgcommontools.blob.core.windows.net/installscripts"
+    },
+    "subnet1Name": {
+      "value": "difrondend"
+    },
+    "sqlAdminUsername": {
+      "value": "disqladmin"
+    },
+    "sqlserverName": {
+      "value": "dioctopussql"
+    },
+    "StorageAccountName": {
+      "value": "diorgcommontools"
+    },
+    "FileShareName": {
+      "value": "octopusshare"
+    },
+    "ResoruceGroupFileShare": {
+      "value": "diglobalresources"
+    },
+    "StorageAccountKey": {
+      "value": ""
+    },
+    "sqlAdminPassword": {
+      "value": "Welcome123uk!"
+    },
+    "existingRIPResourceGroupName": {
+      "value": "dinetworkseun"
+    },
+    "existingRIPName": {
+      "value": "di-publicip"
+    },
+    "octopusAdminUsername": {
+      "value": "admin"
+    },
+    "octopusAdminPassword": {
+      "value": ""
+    },
+    "vmAdminPassword": {
+      "value": ""
+    },
+    "licenseFullName": {
+      "value": "Mani Chand"
+    },
+    "licenseOrganisationName": {
+      "value": "Dinventive Ltd"
+    },
+    "licenseEmailAddress": {
+      "value": ""
+    }
+  }
+}
