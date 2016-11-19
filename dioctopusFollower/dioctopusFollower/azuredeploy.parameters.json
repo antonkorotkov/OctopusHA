@@ -1,0 +1,54 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vnetName": {
+      "value": "dieun"
+    },
+    "subnet1Name": {
+      "value": "difrondend"
+    },
+    "StorageAccountName": {
+      "value": "diorgcommontools"
+    },
+    "FileShareName": {
+      "value": "octopusshare"
+    },
+    "ResoruceGroupFileShare": {
+      "value": "diglobalresources"
+    },
+    "StorageAccountKey": {
+      "value": ""
+    },
+    "sqlAdminUsername": {
+      "value": "disqladmin"
+    },
+    "sqlserverName": {
+      "value": "dioctopussql"
+    },
+    "sqlAdminPassword": {
+      "value": ""
+    },
+    "existingRIPResourceGroupName": {
+      "value": "dinetworkseun"
+    },
+    "existingRIPName": {
+      "value": "di-publicip1"
+    },
+    "octopusAdminUsername": {
+      "value": "admin"
+    },
+    "octopusAdminPassword": {
+      "value": ""
+    },
+    "vmAdminPassword": {
+      "value": ""
+    },
+    "OctopusFollowerNode": {
+      "value": "dinode03-vm"
+    },
+    "OctopusMasterKey": {
+      "value": ""
+    }
+  }
+}
