@@ -27,6 +27,7 @@
   <ItemGroup>
     <Content Include="azuredeploy.parameters.json" />
     <Content Include="azuredeploy.json" />
+    <None Include="CreateAzureFileShare.ps1" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
