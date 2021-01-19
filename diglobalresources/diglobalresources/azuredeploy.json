@@ -8,27 +8,27 @@
         "description": "Relative DNS name for the traffic manager profile, resulting FQDN will be <uniqueDnsName>.trafficmanager.net, must be globally unique."
       }
     },
-      "diorgcommonType": {
-          "type": "string",
-          "defaultValue": "Standard_LRS",
-          "allowedValues": [
-              "Standard_LRS",
-              "Standard_ZRS",
-              "Standard_GRS",
-              "Standard_RAGRS",
-              "Premium_LRS"
-          ]
-      }
+    "diorgcommonType": {
+      "type": "string",
+      "defaultValue": "Standard_LRS",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_ZRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Premium_LRS"
+      ]
+    }
   },
   "variables": {
     "tmApiVersion": "2015-11-01",
-      "diorgcommonName": "diorgcommontools"
+    "diorgcommonName": "diorgcommontools"
   },
   "resources": [
     {
       "apiVersion": "[variables('tmApiVersion')]",
       "type": "Microsoft.Network/trafficManagerProfiles",
-      "name": "diOctopusTrafficManager",
+      "name": "udxOctopusTrafficManager",
       "location": "global",
       "properties": {
         "profileStatus": "Enabled",
@@ -47,35 +47,35 @@
             "name": "OctopusLeader",
             "type": "Microsoft.Network/TrafficManagerProfiles/ExternalEndpoints",
             "properties": {
-              "target": "dioctopuseun0.northeurope.cloudapp.azure.com",
+              "target": "octopus-west0.westus.cloudapp.azure.com",
               "endpointStatus": "Enabled",
-              "endpointLocation": "northeurope"
+              "endpointLocation": "westus"
             }
           },
           {
             "name": "OctopusNode1",
             "type": "Microsoft.Network/TrafficManagerProfiles/ExternalEndpoints",
             "properties": {
-              "target": "dioctopuseuw0.westeurope.cloudapp.azure.com",
+              "target": "octopus-east0.eastus.cloudapp.azure.com",
               "endpointStatus": "Enabled",
-              "endpointLocation": "westeurope"
+              "endpointLocation": "eastus"
             }
           }
         ]
       }
     },
-      {
-          "name": "[variables('diorgcommonName')]",
-          "type": "Microsoft.Storage/storageAccounts",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2015-06-15",
-          "dependsOn": [ ],
-          "tags": {
-              "displayName": "diorgcommon"
-          },
-          "properties": {
-              "accountType": "[parameters('diorgcommonType')]"
-          }
+    {
+      "name": "[variables('diorgcommonName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-06-15",
+      "dependsOn": [],
+      "tags": {
+        "displayName": "diorgcommon"
+      },
+      "properties": {
+        "accountType": "[parameters('diorgcommonType')]"
       }
+    }
   ]
 }
