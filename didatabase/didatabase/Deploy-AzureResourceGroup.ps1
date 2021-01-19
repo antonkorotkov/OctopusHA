@@ -1,10 +1,10 @@
 #Requires -Version 3.0
-#Requires -Module AzureRM.Resources
-#Requires -Module Azure.Storage
+#Requires -Module Az.Resources
+#Requires -Module Az.Storage
 
 Param(
     [string] [Parameter(Mandatory=$true)] $ResourceGroupLocation,
-    [string] $ResourceGroupName = 'didatabaseeun',
+    [string] $ResourceGroupName = 'rg-alpha-' + $ResourceGroupLocation.ToLowerInvariant() + '-database',
     [switch] $UploadArtifacts,
     [string] $StorageAccountName,
     [string] $StorageContainerName = $ResourceGroupName.ToLowerInvariant() + '-stageartifacts',
