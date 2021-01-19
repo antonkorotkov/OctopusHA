@@ -1,6 +1,6 @@
 #Requires -Version 3.0
-#Requires -Module AzureRM.Resources
-#Requires -Module Azure.Storage
+#Requires -Module Az.Resources
+#Requires -Module Az.Storage
 
 Param(
     [string] [Parameter(Mandatory=$true)] $ResourceGroupLocation,
