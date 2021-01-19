@@ -14,17 +14,14 @@
     "sqlserverName": {
       "type": "string"
     },
-    "existingRIPResourceGroupName": {
+    "existingRIPResourceGroupNameWest": {
       "type": "string"
-
     },
-    "existingRIPResourceGroupNameeuw": {
+    "existingRIPResourceGroupNameEast": {
       "type": "string"
-
     },
     "existingRIPName": {
       "type": "string"
-
     },
     "collation": {
       "type": "string",
@@ -33,11 +30,7 @@
     "edition": {
       "type": "string",
       "defaultValue": "Basic",
-      "allowedValues": [
-        "Basic",
-        "Standard",
-        "Premium"
-      ]
+      "allowedValues": ["Basic", "Standard", "Premium"]
     },
     "maxSizeBytes": {
       "type": "string",
@@ -46,25 +39,17 @@
     "requestedServiceObjectiveName": {
       "type": "string",
       "defaultValue": "Basic",
-      "allowedValues": [
-        "Basic",
-        "S0",
-        "S1",
-        "S2",
-        "P1",
-        "P2",
-        "P3"
-      ],
+      "allowedValues": ["Basic", "S0", "S1", "S2", "P1", "P2", "P3"],
       "metadata": {
         "description": "Describes the performance level for Edition"
       }
     }
   },
   "variables": {
-    "MasterpublicIPAddressID": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('existingRIPResourceGroupName'),'/providers/Microsoft.Network/publicIPAddresses/',concat(parameters('existingRIPName'), '0'))]",
-    "Node1publicIPAddressID": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('existingRIPResourceGroupName'),'/providers/Microsoft.Network/publicIPAddresses/',concat(parameters('existingRIPName'), '1'))]",
-    "Node2publicIPAddressID": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('existingRIPResourceGroupNameeuw'),'/providers/Microsoft.Network/publicIPAddresses/',concat(parameters('existingRIPName'), '0'))]",
-    "Node3publicIPAddressID": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('existingRIPResourceGroupNameeuw'),'/providers/Microsoft.Network/publicIPAddresses/',concat(parameters('existingRIPName'), '1'))]"
+    "MasterpublicIPAddressID": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('existingRIPResourceGroupNameWest'),'/providers/Microsoft.Network/publicIPAddresses/',concat(parameters('existingRIPName'), '0'))]",
+    "Node1publicIPAddressID": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('existingRIPResourceGroupNameWest'),'/providers/Microsoft.Network/publicIPAddresses/',concat(parameters('existingRIPName'), '1'))]",
+    "Node2publicIPAddressID": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('existingRIPResourceGroupNameEast'),'/providers/Microsoft.Network/publicIPAddresses/',concat(parameters('existingRIPName'), '0'))]",
+    "Node3publicIPAddressID": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('existingRIPResourceGroupNameEast'),'/providers/Microsoft.Network/publicIPAddresses/',concat(parameters('existingRIPName'), '1'))]"
   },
   "resources": [
     {

@@ -14,11 +14,11 @@
     "administratorLoginPassword": {
       "value": ""
     },
-    "existingRIPResourceGroupName": {
-      "value": "udxnetworkseun"
+    "existingRIPResourceGroupNameWest": {
+      "value": "rg-alpha-westus-network"
     },
-    "existingRIPResourceGroupNameeuw": {
-      "value": "udxnetworkseuw"
+    "existingRIPResourceGroupNameEast": {
+      "value": "rg-alpha-eastus-network"
     },
     "existingRIPName": {
       "value": "di-publicip"
