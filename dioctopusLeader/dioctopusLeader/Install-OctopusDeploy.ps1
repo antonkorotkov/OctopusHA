@@ -118,7 +118,7 @@ function Install-OctopusDeploy
   Write-Log ""
     
   Write-Log "Downloading Octopus Deploy installer '$downloadUrl' to '$msiPath' ..."
-  [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
   Invoke-WebRequest -Uri $downloadUrl -Method GET -OutFile $msiPath
   Write-Log "done."
   
