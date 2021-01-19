@@ -12,7 +12,7 @@
       "value": "udxoctopussql"
     },
     "administratorLoginPassword": {
-      "value": ""
+      "value": "udxoctopussqlpassword"
     },
     "existingRIPResourceGroupNameWest": {
       "value": "rg-alpha-westus-network"
