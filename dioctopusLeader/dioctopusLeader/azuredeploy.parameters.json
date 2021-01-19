@@ -1,21 +1,21 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
   "parameters": {
     "vnetName": {
-      "value": "dieun"
+      "value": "vn-west"
     },
     "baseUrl": {
       "value": "https://diorgcommontools.blob.core.windows.net/installscripts"
     },
     "subnet1Name": {
-      "value": "difrondend"
+      "value": "octo-frondend"
     },
     "sqlAdminUsername": {
-      "value": "disqladmin"
+      "value": "udxsqladmin"
     },
     "sqlserverName": {
-      "value": "dioctopussql"
+      "value": "udxoctopussql"
     },
     "StorageAccountName": {
       "value": "diorgcommontools"
@@ -24,16 +24,16 @@
       "value": "octopusshare"
     },
     "ResoruceGroupFileShare": {
-      "value": "diglobalresources"
+      "value": "rg-alpha-westus-global"
     },
     "StorageAccountKey": {
       "value": ""
     },
     "sqlAdminPassword": {
-      "value": "Welcome123uk!"
+      "value": "u+6#gycg<'?.R!cU"
     },
     "existingRIPResourceGroupName": {
-      "value": "dinetworkseun"
+      "value": "rg-alpha-westus-network"
     },
     "existingRIPName": {
       "value": "di-publicip"
@@ -42,19 +42,19 @@
       "value": "admin"
     },
     "octopusAdminPassword": {
-      "value": ""
+      "value": "u+6#gycg<'?.R!cU"
     },
     "vmAdminPassword": {
-      "value": ""
+      "value": "u+6#gycg<'?.R!cU"
     },
     "licenseFullName": {
-      "value": "Mani Chand"
+      "value": "Anton Korotkov"
     },
     "licenseOrganisationName": {
-      "value": "Dinventive Ltd"
+      "value": "UDX"
     },
     "licenseEmailAddress": {
-      "value": ""
+      "value": "anton@udx.io"
     }
   }
 }
