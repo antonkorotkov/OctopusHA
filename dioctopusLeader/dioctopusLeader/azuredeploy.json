@@ -104,7 +104,6 @@
       "metadata": {
         "description": "Network Name used to deploy the octopus server"
       }
-
     },
     "subnet1Name": {
       "type": "string",
@@ -211,7 +210,6 @@
         "id": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('existingRIPResourceGroupName'),'/providers/Microsoft.virtualNetworks/', '/subnets/',parameters('subnet1Name'))]",
         "subnet1Ref": "[concat(variables('vnetID'),'/subnets/', parameters('subnet1Name'))]"
       }
-
     },
 
     "vnetID": "[resourceId(parameters('existingRIPResourceGroupName'), 'Microsoft.Network/virtualNetworks', parameters('vNetName'))]",
@@ -246,7 +244,7 @@
     }
   },
   "resources": [
-       {
+    {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('vm').osdisk.storageAccount.name]",
@@ -367,21 +365,20 @@
             "createOption": "FromImage"
           }
         },
-          "networkProfile": {
-            "networkInterfaces": [
-              {
-                "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('vm').nic.name)]"
-              }
-            ]
-          },
-          "diagnosticsProfile": {
-            "bootDiagnostics": {
-              "enabled": "true",
-              "storageUri": "[concat('http://', variables('vm').osdisk.storageAccount.name, '.blob.core.windows.net')]"
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('vm').nic.name)]"
             }
+          ]
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": "true",
+            "storageUri": "[concat('http://', variables('vm').osdisk.storageAccount.name, '.blob.core.windows.net')]"
           }
         }
-      
+      }
     },
     {
       "apiVersion": "2015-06-15",
@@ -438,7 +435,5 @@
       }
     }
   ],
-  "outputs": {
-  
-  }
+  "outputs": {}
 }
