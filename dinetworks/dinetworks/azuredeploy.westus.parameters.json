@@ -1,12 +1,12 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
   "parameters": {
     "octopusDnsName": {
-      "value": "dioctopuseun"
+      "value": "octopus-west"
     },
     "vnetName": {
-      "value": "dieun"
+      "value": "vn-west"
     },
     "vnetAddressPrefix": {
       "value": "172.16.0.0/16"
@@ -15,25 +15,25 @@
       "value": "172.16.1.0/24"
     },
     "subnet1Name": {
-      "value": "difrondend"
+      "value": "octo-frondend"
     },
     "subnet2Prefix": {
       "value": "172.16.2.0/24"
     },
     "subnet2Name": {
-      "value": "diapplayer"
+      "value": "octo-applayer"
     },
     "subnet3Prefix": {
       "value": "172.16.3.0/24"
     },
     "subnet3Name": {
-      "value": "didata"
+      "value": "octo-data"
     },
     "subnet4Prefix": {
       "value": "172.16.4.0/24"
     },
     "subnet4Name": {
-      "value": "digateway"
+      "value": "octo-gateway"
     }
   }
 }
