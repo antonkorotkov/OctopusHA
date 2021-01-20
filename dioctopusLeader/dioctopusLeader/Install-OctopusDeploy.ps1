@@ -149,7 +149,7 @@ if (!(Get-ScheduledTask -TaskName "OctopusCmdKey" -ErrorAction SilentlyContinue)
 else
 {
   Write-Log "Unregister the existing Task"
-Unregister-ScheduledTask -TaskPath "\" -TaskName "OctopusCmdKey" -Confirm:$false
+  Unregister-ScheduledTask -TaskPath "\" -TaskName "OctopusCmdKey" -Confirm:$false
 }
 $action = New-ScheduledTaskAction -Execute 'cmdkey' -Argument "/add:$($Config.StorageAccountName).file.core.windows.net /user:$($Config.StorageAccountName) /pass:$($config.storageAccountKey)"
 $trigger =  New-ScheduledTaskTrigger -AtStartup 
