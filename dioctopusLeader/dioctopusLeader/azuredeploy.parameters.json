@@ -20,7 +20,7 @@
     "StorageAccountName": {
       "value": "diorgcommontools"
     },
-    "fileShareName": {
+    "FileShareName": {
       "value": "octopusshare"
     },
     "ResoruceGroupFileShare": {
