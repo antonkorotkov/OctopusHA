@@ -20,14 +20,14 @@
     "StorageAccountName": {
       "value": "diorgcommontools"
     },
-    "fileShareName": {
+    "FileShareName": {
       "value": "octopusshare"
     },
     "ResoruceGroupFileShare": {
       "value": "rg-alpha-westus-global"
     },
     "StorageAccountKey": {
-      "value": ""
+      "value": "test"
     },
     "sqlAdminPassword": {
       "value": "u+6#gycg<'?.R!cU"
