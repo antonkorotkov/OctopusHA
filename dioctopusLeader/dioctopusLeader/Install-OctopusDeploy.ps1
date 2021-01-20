@@ -22,7 +22,7 @@ $userRightsdownloadUrl = "https://diorgcommontools.blob.core.windows.net/install
 $installBasePath = "D:\Install\"
 $userRightsPath = $installBasePath + $userRightsFileName
 $msiPath = $installBasePath + $msiFileName
-$msiLogPath = $installBasePath + $msiFileName + '.log'
+$msiLogPath = $installBasePath + $msiFileName + '-log.log'
 $installerLogPath = $installBasePath + 'Install-OctopusDeploy.ps1.log'
 $octopusLicenseUrl = "https://octopusdeploy.com/api/licenses/trial"
 $OFS = "`r`n"
@@ -118,8 +118,7 @@ function Install-OctopusDeploy
   Write-Log ""
     
   Write-Log "Downloading Octopus Deploy installer '$downloadUrl' to '$msiPath' ..."
-  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-  Invoke-WebRequest -Uri $downloadUrl -Method GET -OutFile $msiPath
+  Start-BitsTransfer $downloadUrl $msiPath
   Write-Log "done."
   
   Write-Log "Installing via '$msiPath' ..."
@@ -196,7 +195,7 @@ function Configure-OctopusDeploy
   $exe = 'C:\Program Files\Octopus Deploy\Octopus\Octopus.Server.exe'
     
   $count = 0
-  while(!(Test-Path $exe) -and $count -lt 5)
+  while(!(Test-Path $exe) -and $count -lt 10)
   {
     Write-Log "$exe - not available yet ... waiting 10s ..."
     Start-Sleep -s 10
@@ -213,31 +212,31 @@ function Configure-OctopusDeploy
   $output = .$exe $args
   Write-CommandOutput $output
   Write-Log "done."
+
+  Write-Log "Creating Octopus Deploy database ..."
+  $args = @(
+    'database', 
+    '--console',
+    '--instance', 'OctopusServer', 
+    '--connectionString', $($config.sqlDbConnectionString),
+    '--create'
+  )
+  $output = .$exe $args
+  Write-CommandOutput $output
+  Write-Log "done."
   
   Write-Log "Configuring Octopus Deploy instance ..."
   $args = @(
     'configure', 
     '--console',
     '--instance', 'OctopusServer', 
-    '--home', 'C:\Octopus', 
-    '--storageConnectionString', $($config.sqlDbConnectionString), 
+    '--home', 'C:\Octopus',
     '--upgradeCheck', 'True', 
     '--upgradeCheckWithStatistics', 'True', 
-    '--webAuthenticationMode', 'UsernamePassword', 
+    '--usernamePasswordIsEnabled', 'True', 
     '--webForceSSL', 'False', 
     '--webListenPrefixes', 'http://localhost:80/', 
-    '--commsListenPort', '10943'     
-  )
-  $output = .$exe $args
-  Write-CommandOutput $output
-  Write-Log "done."
-    
-  Write-Log "Creating Octopus Deploy database ..."
-  $args = @(
-    'database', 
-    '--console',
-    '--instance', 'OctopusServer', 
-    '--create'
+    '--commsListenPort', '10943'
   )
   $output = .$exe $args
   Write-CommandOutput $output
@@ -296,29 +295,29 @@ function Configure-OctopusDeploy
   Write-CommandOutput $output
   Write-Log "done."  
 
-  Write-Log "Obtaining a trial license for Full Name: $($config.licenseFullName), Organisation Name: $($config.licenseOrganisationName), Email Address: $($config.licenseEmailAddress) ..."
-  $postParams = @{ 
-                  FullName="$($config.licenseFullName)"
-                  Organization="$($config.licenseOrganisationName)"
-                  EmailAddress="$($config.licenseEmailAddress)" 
-                  Source="azure"
-                 }
-  $response = Invoke-WebRequest -UseBasicParsing -Uri "$octopusLicenseUrl" -Method POST -Body $postParams
-  $utf8NoBOM = New-Object System.Text.UTF8Encoding($false)
-  $bytes  = $utf8NoBOM.GetBytes($response.Content)
-  $licenseBase64 = [System.Convert]::ToBase64String($bytes)
-  Write-Log "done."
+  # Write-Log "Obtaining a trial license for Full Name: $($config.licenseFullName), Organisation Name: $($config.licenseOrganisationName), Email Address: $($config.licenseEmailAddress) ..."
+  # $postParams = @{ 
+  #                 FullName="$($config.licenseFullName)"
+  #                 Organization="$($config.licenseOrganisationName)"
+  #                 EmailAddress="$($config.licenseEmailAddress)" 
+  #                 Source="azure"
+  #                }
+  # $response = Invoke-WebRequest -UseBasicParsing -Uri "$octopusLicenseUrl" -Method POST -Body $postParams
+  # $utf8NoBOM = New-Object System.Text.UTF8Encoding($false)
+  # $bytes  = $utf8NoBOM.GetBytes($response.Content)
+  # $licenseBase64 = [System.Convert]::ToBase64String($bytes)
+  # Write-Log "done."
     
-  Write-Log "Installing license for Octopus Deploy instance ..."
-  $args = @(
-    'license', 
-    '--console',
-    '--instance', 'OctopusServer', 
-    '--licenseBase64', $licenseBase64
-  )
-  $output = .$exe $args
-  Write-CommandOutput $output
-  Write-Log "done."
+  # Write-Log "Installing license for Octopus Deploy instance ..."
+  # $args = @(
+  #   'license', 
+  #   '--console',
+  #   '--instance', 'OctopusServer', 
+  #   '--licenseBase64', $licenseBase64
+  # )
+  # $output = .$exe $args
+  # Write-CommandOutput $output
+  # Write-Log "done."
     
   Write-Log "Reconfigure and start Octopus Deploy instance ..."
   $args = @(
