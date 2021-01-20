@@ -11,7 +11,7 @@ param (
   [string] $VMAdminPassword,
   [string] $StorageAccountName,
   [string] $storageAccountKey,
-  [string] $FileShareName
+  [string] $fileShareName
 )
 
 $config = @{}
@@ -67,23 +67,23 @@ function Get-Config
   $config.Add("VMAdminPassword", [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($VMAdminPassword)))
   $config.Add("StorageAccountName", [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($StorageAccountName)))
   $config.Add("storageAccountKey", [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($storageAccountKey)))
-  $config.Add("FileShareName", [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($FileShareName)))
-    
+  $config.Add("fileShareName", [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($fileShareName)))
+  
+  Write-Output $config
+
   Write-Log "done."
   Write-Log ""
 }
 
 function Create-DataDisk
 {
- 
-
- $Artifactspath = "\\$($Config.StorageAccountName).file.core.windows.net\$($Config.FileShareName)\OctopusData\Artifacts"
+  $Artifactspath = "\\$($Config.StorageAccountName).file.core.windows.net\$($Config.fileShareName)\OctopusData\Artifacts"
   $config.Add('octopusArtifactsPath', $Artifactspath)
   Write-Log "done."
   
-  $config.Add('octopusTaskLogsPath', "\\$($Config.StorageAccountName).file.core.windows.net\$($Config.FileShareName)\OctopusData\TaskLogs")
+  $config.Add('octopusTaskLogsPath', "\\$($Config.StorageAccountName).file.core.windows.net\$($Config.fileShareName)\OctopusData\TaskLogs")
   Write-Log "done."
-  $PackagesPath = "\\$($Config.StorageAccountName).file.core.windows.net\$($Config.FileShareName)\OctopusData\Packages"
+  $PackagesPath = "\\$($Config.StorageAccountName).file.core.windows.net\$($Config.fileShareName)\OctopusData\Packages"
   $config.Add('octopusPackagesPath', $PackagesPath)
   Write-Log "done."
 

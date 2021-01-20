@@ -22,7 +22,7 @@
         "description": "Storage Account Name for FileShare"
       }
     },
-    "FileShareName": {
+    "fileShareName": {
       "type": "string",
       "metadata": {
         "description": "FileShare Name"
@@ -189,7 +189,7 @@
           "fileUris": [
             "[concat(variables('baseUrl'), '/Install-OctopusDeploy.ps1')]"
           ],
-          "commandToExecute": "[concat('powershell.exe -File Install-OctopusDeploy.ps1 ', base64(variables('azureSql').database.connectionString), ' ', base64(variables('octopus').license.fullName), ' ', base64(variables('octopus').license.organisationName), ' ', base64(variables('octopus').license.emailAddress), ' ', base64(variables('octopus').credentials.admin.username), ' ', base64(variables('octopus').credentials.admin.password), ' ', base64(parameters('vmAdminUsername')),  ' ', base64(parameters('vmAdminPassword')), ' ', base64(parameters('StorageAccountName')), ' ', base64(parameters('StorageAccountKey')), ' ', base64(parameters('FileShareName')),  ' 2>&1 > D:\\Install-OctopusDeploy1.ps1.log ')]"
+          "commandToExecute": "[concat('powershell.exe -File Install-OctopusDeploy.ps1 ', base64(variables('azureSql').database.connectionString), ' ', base64(variables('octopus').license.fullName), ' ', base64(variables('octopus').license.organisationName), ' ', base64(variables('octopus').license.emailAddress), ' ', base64(variables('octopus').credentials.admin.username), ' ', base64(variables('octopus').credentials.admin.password), ' ', base64(parameters('vmAdminUsername')),  ' ', base64(parameters('vmAdminPassword')), ' ', base64(parameters('StorageAccountName')), ' ', base64(parameters('StorageAccountKey')), ' ', base64(parameters('fileShareName')),  ' 2>&1 > D:\\Install-OctopusDeploy1.ps1.log ')]"
         },
         "diagnostics": {
           "name": "[concat(variables('namespace'), '-vm/Microsoft.Insights.VMDiagnosticsSettings')]",
